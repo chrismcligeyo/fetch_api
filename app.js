@@ -10,21 +10,21 @@ document.getElementById('button 3').addEventListener('click', getExternalApi);
 
 function getText(){
     fetch('text.txt')
-        .then(function(response){ //fetch uses promises. to get a response from fetch you have to use .then().  same as promis
+        .then(response =>  response.text()) //fetch uses promises. to get a response from fetch you have to use .then().  same as promis
 
         // console.log(response); /*
         // //dsiplays
         // Response {type: "basic", url: "http://localhost:63342/fetchApi/text.txt", redirected: false, status: 200, ok: true, …}
         // */
 
-        return response.text(); //returns  a promise. we use .text() method shown in console under prototypes because we want to return text file. if it was json we would use .json()
+         //returns  a promise. we use .text() method shown in console under prototypes because we want to return text file. if it was json we would use .json()
              /*
         Promise {<pending>}
 
          */ //to get response from promise we have to use .then
-        })
 
-        .then(function(textData){
+
+        .then(textData=> {
             console.log(textData); //displays data in text,txt when button clicked. THis is a text file
 
             document.getElementById('output').innerHTML = textData; //display datain test.txt in body not cosole
@@ -32,19 +32,18 @@ function getText(){
     }) //we put in data. thats what this promise returns
 
         //to geterror use .catch
-        .catch(function(error){
-            console.log(error);
-        });
+        .catch(error =>  console.log(error));
+
+
 }
 
 function getJson(){
     fetch('posts.json')
-        .then(function(response){
-            return response.json();
+        .then(response => response.json())
 
-        })
+
         //get json data
-        .then(function(jsonData){
+        .then(jsonData => {
             console.log(jsonData);
             //to display in body. is an array of json data, so loop through it
 
@@ -58,7 +57,7 @@ function getJson(){
 
         })
 
-        .catch(function(error){
+        .catch((error) => {
             console.log(error);
 
         });
@@ -67,12 +66,9 @@ function getJson(){
 
 function getExternalApi(){
     fetch('https://api.github.com/users') //external api
-        .then(function(response){
-            return response.json();
-
-        })
+        .then(response => response.json())
         //get json data
-        .then(function(externaalApiData){
+        .then(externaalApiData => {
             console.log(externaalApiData);
             //to display in body. is an array of json data, so loop through it
 
@@ -86,9 +82,6 @@ function getExternalApi(){
 
         })
 
-        .catch(function(error){
-            console.log(error);
-
-        });
+        .catch(error => console.log(error))
 
 }
